@@ -22,6 +22,7 @@ export type Level = typeof level[number];
 
 export interface User {
   id: number;
+  joinDate: string;
   username: string;
   firstName: string;
   lastName: string;
@@ -48,6 +49,7 @@ for (let i = 0; i < 1000; i++) {
 
   users.push({
     id: i + 1,
+    joinDate: faker.date.past().toISOString(),
     username: faker.internet.userName(firstName, lastName),
     firstName,
     lastName,
@@ -63,8 +65,8 @@ export class UsersService {
   getAll(options: {
     page: number;
     limit: number;
-    department: Department;
-    level: Level;
+    department: string;
+    level: string;
   }): Observable<PagedResult<User>> {
     const limit = Math.max(options.limit, 1);
     const page = Math.max(options.page, 0);
@@ -72,7 +74,8 @@ export class UsersService {
 
     const selectedUsers = users.filter((user) => {
       return (
-        user.department === options.department && user.level === options.level
+        (user.department as string).toLowerCase() === options.department &&
+        (user.level as string).toLowerCase() === options.level
       );
     });
 
