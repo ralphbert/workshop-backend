@@ -72,24 +72,29 @@ export class UsersService {
     const page = Math.max(options.page, 0);
     const start = page * limit;
 
-    const selectedUsers = users.filter((user) => {
-      return (
-        (user.department as string).toLowerCase() === options.department &&
-        (user.level as string).toLowerCase() === options.level
-      );
-    });
+    let filteredUsers = users;
 
-    const resultingUsers = selectedUsers.slice(start, start + limit);
-    console.log(resultingUsers);
-    const minDelay = Math.random() < 0.2 ? 3000 : 500;
+    if (options.department) {
+      filteredUsers = filteredUsers.filter(
+        (user) => user.department.toLowerCase() === options.department,
+      );
+    }
+
+    if (options.level) {
+      filteredUsers = filteredUsers.filter(
+        (user) => user.level.toLowerCase() === options.level,
+      );
+    }
+
+    const resultingUsers = filteredUsers.slice(start, start + limit);
 
     return of({
       pagination: {
         page,
         limit,
-        total: selectedUsers.length,
+        total: filteredUsers.length,
       },
       results: resultingUsers,
-    }).pipe(delay(Math.random() * 500 + minDelay));
+    });
   }
 }

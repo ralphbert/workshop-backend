@@ -6,7 +6,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { tap } from 'rxjs';
+import { delay, map, tap } from 'rxjs';
 
 @Controller('users')
 export class UsersController {
@@ -19,17 +19,28 @@ export class UsersController {
     @Query('department') department: string,
     @Query('level') level: string,
     @Query('errorRate') errorRate: string,
+    @Query('delay') delayParams: string,
   ) {
-    if (page == null || !limit || !department || !level) {
+    if (page == null || !limit) {
       throw new HttpException('Invalid arguments', HttpStatus.BAD_REQUEST);
+    }
+
+    let delayTime = 0;
+
+    if (delayParams) {
+      const parts = delayParams.split(',');
+
+      if (parts.length === 2) {
+        delayTime = Math.random() * parseFloat(parts[1]) + parseFloat(parts[0]);
+      }
     }
 
     return this.usersService
       .getAll({
         page: parseInt(page, 10),
         limit: parseInt(limit, 10),
-        department: department.toLowerCase(),
-        level: level.toLowerCase(),
+        department: department?.toLowerCase(),
+        level: level?.toLowerCase(),
       })
       .pipe(
         tap(() => {
@@ -43,6 +54,13 @@ export class UsersController {
               );
             }
           }
+        }),
+        delay(delayTime),
+        map((result) => {
+          return {
+            duration: delayTime / 1000,
+            ...result,
+          };
         }),
       );
   }
