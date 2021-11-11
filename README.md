@@ -58,16 +58,20 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+## Login
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Endpoint: `POST /auth/login`
+Body:
 
-## Stay in touch
+```JSON
+{
+  "username": "admin",
+  "password": "admin"
+}
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Profile
 
-## License
+Add bearer token to head: `Authorization: Bearer TOKEN`.
 
-Nest is [MIT licensed](LICENSE).
+Endpoint: `GET /auth/profile`
