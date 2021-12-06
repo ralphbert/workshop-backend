@@ -1,3 +1,13 @@
+POST http://{{host}}/auth/sign-up
+Content-Type: application/json
+
+{
+  "firstName": "Firsty",
+  "lastName": "Lasty",
+  "email": "firsty.lasty@example.com",
+  "password": "12345678"
+}
+
 ###
 POST http://{{host}}/auth/login
 Content-Type: application/json
@@ -10,6 +20,9 @@ Content-Type: application/json
 > {%
     client.global.set("token", response.body.access_token);
 %}
+###
+
+GET http://{{host}}/auth/check-email?email={{username}}@example.com
 
 ###
 

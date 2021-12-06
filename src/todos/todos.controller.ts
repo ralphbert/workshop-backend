@@ -3,7 +3,9 @@ import {JwtAuthGuard} from '../auth/jwt-auth.guard';
 import {TodosService} from './todos.service';
 import {CreateTodoDto} from './dto/create-todo.dto';
 import {UpdateTodoDto} from './dto/update-todo.dto';
+import {ApiTags} from '@nestjs/swagger';
 
+@ApiTags('Todos')
 @Controller('todos')
 export class TodosController {
     constructor(private readonly todosService: TodosService) {

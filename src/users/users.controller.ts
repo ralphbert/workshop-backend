@@ -7,7 +7,9 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { delay, map, tap } from 'rxjs';
+import {ApiTags} from '@nestjs/swagger';
 
+@ApiTags('Users')
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}

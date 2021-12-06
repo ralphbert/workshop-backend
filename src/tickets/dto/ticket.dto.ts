@@ -1,5 +1,14 @@
-export const TicketStatusList = ['backlog', 'planned', 'doing', 'dev done', 'qa done'] as const;
-export type TicketStatus = typeof TicketStatusList[number];
 
-export const TicketPriorityList = ['low', 'normal', 'high'] as const;
-export type TicketPriority = typeof TicketPriorityList[number];
+export enum TicketStatus {
+    backlog = 'backlog',
+    planned = 'planned',
+    doing = 'doing',
+    devDone = 'devDone',
+    qaDone = 'qaDone',
+}
+
+export enum TicketPriority {
+    low = 'low',
+    normal = 'normal',
+    high = 'high',
+}

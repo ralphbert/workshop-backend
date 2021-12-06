@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import * as faker from 'faker';
 import { Observable, of } from 'rxjs';
+import {Sign} from 'crypto';
+import {SignUpDto} from '../auth/dto/sign-up.dto';
+import {ApiProperty} from '@nestjs/swagger';
 
 const departments = [
   'Development',
@@ -27,6 +30,7 @@ export interface User {
   password: string;
   firstName: string;
   lastName: string;
+  email: string;
   department: Department;
   level: Level;
 }
@@ -41,6 +45,7 @@ const users: User[] = [
     id: 10000,
     joinDate: new Date().toISOString(),
     password: 'admin',
+    email: 'admin@example.com'
   },
 ];
 
@@ -55,6 +60,29 @@ export interface PagedResult<T> {
   results: T[];
 }
 
+export class PublicUser implements Omit<User, 'password'> {
+  @ApiProperty()
+  id: number;
+  @ApiProperty({
+    format: 'datetime'
+  })
+  joinDate: string;
+  @ApiProperty()
+  username: string;
+  @ApiProperty()
+  firstName: string;
+  @ApiProperty()
+  lastName: string;
+  @ApiProperty()
+  email: string;
+  @ApiProperty()
+  department: Department;
+  @ApiProperty()
+  level: Level;
+}
+
+let counter = 0;
+
 for (let i = 0; i < 1000; i++) {
   const firstName = faker.name.firstName();
   const lastName = faker.name.lastName();
@@ -68,16 +96,36 @@ for (let i = 0; i < 1000; i++) {
     department: faker.random.arrayElement(departments),
     level: faker.random.arrayElement(level),
     password: '12345678',
+    email: faker.internet.email(firstName, lastName),
   });
+
+  counter = i;
 }
+
+counter++;
 
 @Injectable()
 export class UsersService {
+  create(create: SignUpDto) {
+    const user: User = {
+      ...create,
+      id: counter++,
+      department: 'Development',
+      level: 'Intermediate',
+      joinDate: new Date().toDateString(),
+      username: create.email,
+    }
+
+    users.push(user);
+
+    return user;
+  }
+
   async findOneByUsername(username: string): Promise<User | undefined> {
     return users.find((current) => current.username === username);
   }
 
-  async findOneById(id: number): Promise<Omit<User, 'password'> | undefined> {
+  async findOneById(id: number): Promise<PublicUser | undefined> {
     const user = users.find((current) => current.id == id);
 
     if (user) {
@@ -122,5 +170,9 @@ export class UsersService {
       },
       results: resultingUsers,
     });
+  }
+
+  emailAvailable(email: string): boolean {
+    return !users.find(user => user.email === email);
   }
 }

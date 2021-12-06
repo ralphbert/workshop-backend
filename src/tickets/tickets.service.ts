@@ -3,8 +3,9 @@ import {CreateTicketDto} from './dto/create-ticket.dto';
 import {UpdateTicketDto} from './dto/update-ticket.dto';
 import {Ticket} from './entities/ticket.entity';
 import {BaseDummyService} from '../lib/base-dummy.service';
-import {TicketPriorityList, TicketStatusList} from './dto/ticket.dto';
+import {TicketPriority, TicketStatus} from './dto/ticket.dto';
 import {TicketSettingsDto} from './dto/ticket-settings.dto';
+import {ApiOkResponse} from '@nestjs/swagger';
 
 @Injectable()
 export class TicketsService extends BaseDummyService<Ticket, CreateTicketDto, UpdateTicketDto> {
@@ -23,8 +24,8 @@ export class TicketsService extends BaseDummyService<Ticket, CreateTicketDto, Up
 
     getSettings(): TicketSettingsDto {
         return {
-            status: [...TicketStatusList],
-            priority: [...TicketPriorityList],
+            status: [...Object.values(TicketStatus)],
+            priority: [...Object.values(TicketPriority)],
         }
     }
 }
