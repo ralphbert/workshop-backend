@@ -1,61 +1,41 @@
-import { Body, Controller, Delete, Get, Param, Post, UseGuards } from "@nestjs/common";
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-
-export interface TodoCreate {
-  title: string;
-  done?: boolean;
-  due?: string;
-}
-
-export interface Todo extends TodoCreate {
-  id: number;
-}
-
-let todos: Todo[] = [
-  {
-    id: 1,
-    done: false,
-    title: 'Buy milk',
-  },
-  {
-    id: 2,
-    done: false,
-    title: 'Wash dishes',
-  },
-  {
-    id: 3,
-    done: false,
-    title: 'Vacuum house',
-  },
-];
-
-let id = 4;
+import {Body, Controller, Delete, Get, Param, Patch, Post, UseGuards} from '@nestjs/common';
+import {JwtAuthGuard} from '../auth/jwt-auth.guard';
+import {TodosService} from './todos.service';
+import {CreateTodoDto} from './dto/create-todo.dto';
+import {UpdateTodoDto} from './dto/update-todo.dto';
 
 @Controller('todos')
 export class TodosController {
-  @UseGuards(JwtAuthGuard)
-  @Get('')
-  getAll() {
-    return todos;
-  }
+    constructor(private readonly todosService: TodosService) {
+    }
 
-  @UseGuards(JwtAuthGuard)
-  @Post()
-  create(@Body() body: TodoCreate) {
-    console.log(body);
-    const todo = {
-      done: false,
-      ...body,
-      id: id++,
-    };
+    @UseGuards(JwtAuthGuard)
+    @Post()
+    create(@Body() createTodoDto: CreateTodoDto) {
+        return this.todosService.create(createTodoDto);
+    }
 
-    todos.push(todo);
-    return todo;
-  }
+    @UseGuards(JwtAuthGuard)
+    @Get()
+    findAll() {
+        return this.todosService.findAll();
+    }
 
-  @Delete(':id')
-  delete(@Param('id') id: string) {
-    todos = todos.filter((todo) => todo.id !== +id);
-    return;
-  }
+    @UseGuards(JwtAuthGuard)
+    @Get(':id')
+    findOne(@Param('id') id: string) {
+        return this.todosService.findOne(+id);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Patch(':id')
+    update(@Param('id') id: string, @Body() updateTodoDto: UpdateTodoDto) {
+        return this.todosService.update(+id, updateTodoDto);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Delete(':id')
+    remove(@Param('id') id: string) {
+        return this.todosService.remove(+id);
+    }
 }
