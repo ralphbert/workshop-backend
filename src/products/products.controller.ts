@@ -17,7 +17,7 @@ export class ProductsController {
 
   @UseGuards(JwtAuthGuard)
   @Get(':tag')
-  findAllByTag(tag: string) {
+  findAllByTag(@Param('tag') tag: string) {
     return this.service.findAllByTag(tag);
   }
 
