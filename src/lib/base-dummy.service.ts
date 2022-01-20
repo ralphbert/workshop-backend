@@ -1,6 +1,7 @@
 import {CrudStorage, IdEntity} from './crud-storage';
+import { CrudServiceInterface } from "./crud-service.interface";
 
-export abstract class BaseDummyService<T extends IdEntity, CreateEntity, UpdateEntity> {
+export abstract class BaseDummyService<T extends IdEntity, CreateEntity, UpdateEntity> implements CrudServiceInterface<T, CreateEntity, UpdateEntity> {
     storage: CrudStorage<T>;
 
     constructor(private items: T[] = []) {
