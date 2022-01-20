@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from "@nestjs/common";
-import { ProductsService } from "./products.service";
+import { initValues, ProductsService } from "./products.service";
 import { CreateProductDto } from "./dto/create-product.dto";
 import { UpdateProductDto } from "./dto/update-product.dto";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
@@ -13,6 +13,12 @@ export class ProductsController {
   @Post()
   create(@Body() createDto: CreateProductDto) {
     return this.service.create(createDto);
+  }
+
+  @Get('init')
+  init() {
+    this.service.reset(initValues);
+    return 'OK'
   }
 
   @Get(":tag")

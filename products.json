@@ -1,3 +1,112 @@
 {
-  "items": []
+    "items": [
+        {
+            "id": 1,
+            "name": "PC",
+            "price": 1800,
+            "tags": [
+                "Computers"
+            ],
+            "image": "https://dummyimage.com/400x350"
+        },
+        {
+            "id": 2,
+            "name": "MacBook",
+            "price": 2499,
+            "tags": [
+                "Computers"
+            ],
+            "image": "https://dummyimage.com/400x350"
+        },
+        {
+            "id": 3,
+            "name": "MacBook Pro",
+            "price": 2999,
+            "tags": [
+                "Computers"
+            ],
+            "image": "https://dummyimage.com/400x350"
+        },
+        {
+            "id": 4,
+            "name": "Laptop",
+            "price": 2100,
+            "tags": [
+                "Computers"
+            ],
+            "image": "https://dummyimage.com/400x350"
+        },
+        {
+            "id": 5,
+            "name": "iPhone",
+            "price": 899,
+            "tags": [
+                "Mobile Phones"
+            ],
+            "image": "https://dummyimage.com/400x350"
+        },
+        {
+            "id": 6,
+            "name": "Samsung S20",
+            "price": 799,
+            "tags": [
+                "Mobile Phones"
+            ],
+            "image": "https://dummyimage.com/400x350"
+        },
+        {
+            "id": 7,
+            "name": "iPad",
+            "price": 1099,
+            "tags": [
+                "Tablets"
+            ],
+            "image": "https://dummyimage.com/400x350"
+        },
+        {
+            "id": 8,
+            "name": "Android Tablet",
+            "price": 299,
+            "tags": [
+                "Tablets"
+            ],
+            "image": "https://dummyimage.com/400x350"
+        },
+        {
+            "id": 9,
+            "name": "Washing Machine",
+            "price": 599,
+            "tags": [
+                "Household"
+            ],
+            "image": "https://dummyimage.com/400x350"
+        },
+        {
+            "id": 10,
+            "name": "KitchenAid",
+            "price": 399,
+            "tags": [
+                "Household"
+            ],
+            "image": "https://dummyimage.com/400x350"
+        },
+        {
+            "id": 11,
+            "name": "Pizza Oven",
+            "price": 599,
+            "tags": [
+                "Household"
+            ],
+            "image": "https://dummyimage.com/400x350"
+        },
+        {
+            "id": 12,
+            "name": "Dishwasher",
+            "price": 299,
+            "tags": [
+                "Household"
+            ],
+            "image": "https://dummyimage.com/400x350"
+        }
+    ]
 }

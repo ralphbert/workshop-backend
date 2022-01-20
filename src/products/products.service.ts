@@ -5,7 +5,7 @@ import { CreateProductDto } from "./dto/create-product.dto";
 import { UpdateProductDto } from "./dto/update-product.dto";
 import { PersistedDummyService } from "../lib/persisted-dummy.service";
 
-const initValues = [
+export const initValues = [
   ProductEntity.create(1, 'PC', 1800, ['Computers'], 'https://dummyimage.com/400x350'),
   ProductEntity.create(2, 'MacBook', 2499, ['Computers'], 'https://dummyimage.com/400x350'),
   ProductEntity.create(3, 'MacBook Pro', 2999, ['Computers'], 'https://dummyimage.com/400x350'),
