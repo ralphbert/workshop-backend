@@ -3,7 +3,9 @@ import { ProductsService } from "./products.service";
 import { CreateProductDto } from "./dto/create-product.dto";
 import { UpdateProductDto } from "./dto/update-product.dto";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags("Products")
 @Controller("products")
 @UseGuards(JwtAuthGuard)
 export class ProductsController {
@@ -25,7 +27,7 @@ export class ProductsController {
     return this.service.findAll();
   }
 
-  @Get()
+  @Get('tags')
   getTags() {
     return this.service.getTags();
   }
