@@ -1,12 +1,13 @@
 import { IdEntity } from "./crud-storage";
-import { CrudServiceInterface } from "./crud-service.interface";
+import { CrudServiceInterface, getPaginatedResponse, PaginatedResponse } from "./crud-service.interface";
 import { JsonDB } from "node-json-db";
 import { getDatabase } from "../db.service";
-import { HttpException, HttpStatus } from "@nestjs/common";
+import { HttpException, HttpStatus, Query } from "@nestjs/common";
 
 const INITIAL_ID = 0;
 
-export abstract class PersistedDummyService<T extends IdEntity, CreateEntity, UpdateEntity extends IdEntity> implements CrudServiceInterface<T, CreateEntity, UpdateEntity> {
+export abstract class PersistedDummyService<T extends IdEntity, CreateEntity, UpdateEntity extends IdEntity> implements
+  CrudServiceInterface<T, CreateEntity, UpdateEntity> {
   db: JsonDB;
   lastId = INITIAL_ID;
 
@@ -19,7 +20,7 @@ export abstract class PersistedDummyService<T extends IdEntity, CreateEntity, Up
       this.db.push('/items', []);
       this.lastId = INITIAL_ID;
     } else {
-      this.lastId = (this.findAll() || []).reduce((maxId, item) => {
+      this.lastId = (this.db.getData('/items') || []).reduce((maxId, item) => {
         return Math.max(item.id, maxId);
       }, INITIAL_ID);
     }
@@ -44,8 +45,12 @@ export abstract class PersistedDummyService<T extends IdEntity, CreateEntity, Up
     return item as T;
   }
 
-  findAll(): T[] {
-    return (this.db.getData("/items") || []);
+  findAll(@Query('page') page = "1", @Query('limit') limit = "20"): PaginatedResponse<T> {
+    return getPaginatedResponse(
+      (this.db.getData("/items") || []),
+      parseInt(page),
+      parseInt(limit),
+    );
   }
 
   findOne(id: number): T | undefined {
