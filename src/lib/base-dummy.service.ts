@@ -1,5 +1,10 @@
 import {CrudStorage, IdEntity} from './crud-storage';
-import { CrudServiceInterface, getPaginatedResponse, PaginatedResponse } from "./crud-service.interface";
+import {
+    CrudServiceInterface,
+    defaultPaginationParams,
+    getPaginatedResponse,
+    PaginatedResponse
+} from "./crud-service.interface";
 import { PaginationParams } from "./pagination-params";
 
 export abstract class BaseDummyService<T extends IdEntity, CreateEntity, UpdateEntity> implements CrudServiceInterface<T, CreateEntity, UpdateEntity> {
@@ -16,7 +21,7 @@ export abstract class BaseDummyService<T extends IdEntity, CreateEntity, UpdateE
         return this.storage.add(entity);
     }
 
-    findAll(pagination: PaginationParams): PaginatedResponse<T> {
+    findAll(pagination: PaginationParams = defaultPaginationParams): PaginatedResponse<T> {
         return getPaginatedResponse(this.storage.getAll(), parseInt(pagination.page), parseInt(pagination.limit));
     }
 

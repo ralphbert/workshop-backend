@@ -2,8 +2,8 @@ import { IsNumberString } from "class-validator";
 
 export class PaginationParams {
   @IsNumberString()
-  page: string = '1';
+  page: string | number = '1';
 
   @IsNumberString()
-  limit: string = '20';
+  limit: string | number = '20';
 }

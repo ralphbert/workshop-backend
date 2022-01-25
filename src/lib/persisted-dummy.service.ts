@@ -1,5 +1,10 @@
 import { IdEntity } from "./crud-storage";
-import { CrudServiceInterface, getPaginatedResponse, PaginatedResponse } from "./crud-service.interface";
+import {
+  CrudServiceInterface,
+  defaultPaginationParams,
+  getPaginatedResponse,
+  PaginatedResponse, toInt
+} from "./crud-service.interface";
 import { JsonDB } from "node-json-db";
 import { getDatabase } from "../db.service";
 import { HttpException, HttpStatus, Query } from "@nestjs/common";
@@ -50,11 +55,11 @@ export abstract class PersistedDummyService<T extends IdEntity, CreateEntity, Up
     return this.db.getData("/items") || [];
   }
 
-  findAll(pagination: PaginationParams): PaginatedResponse<T> {
+  findAll(pagination: PaginationParams = defaultPaginationParams): PaginatedResponse<T> {
     return getPaginatedResponse(
       this.getAll(),
-      parseInt(pagination.page),
-      parseInt(pagination.limit),
+      toInt(pagination.page),
+      toInt(pagination.limit),
     );
   }
 

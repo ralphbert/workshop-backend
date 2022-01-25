@@ -19,10 +19,19 @@ export interface PaginatedResponse<T> {
   items: T[];
 }
 
+export const defaultPaginationParams: PaginationParams = {
+  page: '1',
+  limit: '20',
+};
+
 export interface CrudServiceInterface<T extends IdEntity, CreateEntity, UpdateEntity> {
   create(createDto: CreateEntity): T;
   findAll(pagination: PaginationParams): PaginatedResponse<T>;
   findOne(id: number): T | undefined;
   update(id: number, updateDto: UpdateEntity): T;
   remove(id: number): void;
+}
+
+export function toInt(n: string | number) {
+  return parseInt(String(n));
 }
