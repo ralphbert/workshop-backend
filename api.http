@@ -22,6 +22,22 @@ Content-Type: application/json
 %}
 ###
 
+GET http://{{host}}/products
+
+###
+
+GET http://{{host}}/products/tags
+
+###
+
+GET http://{{host}}/products/1
+
+###
+
+GET http://{{host}}/products/Computers
+
+###
+
 GET http://{{host}}/auth/check-email?email={{username}}@example.com
 
 ###

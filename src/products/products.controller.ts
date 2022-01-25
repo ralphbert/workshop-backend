@@ -17,25 +17,25 @@ export class ProductsController {
     return this.service.create(createDto);
   }
 
+  @Get()
+  findAll() {
+    return this.service.findAll();
+  }
+
   @Get('init')
   init() {
     this.service.reset(initValues);
     return 'OK'
   }
 
-  @Get(":tag")
-  findAllByTag(@Param("tag") tag: string) {
-    return this.service.findAllByTag(tag);
-  }
-
-  @Get()
-  findAll() {
-    return this.service.findAll();
-  }
-
   @Get('tags')
   getTags() {
     return this.service.getTags();
+  }
+
+  @Get("tags/:tag")
+  findAllByTag(@Param("tag") tag: string) {
+    return this.service.findAllByTag(tag);
   }
 
   @Get(":id")
