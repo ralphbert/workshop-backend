@@ -1,9 +1,10 @@
-import {Body, Controller, Delete, Get, Param, Patch, Post, UseGuards} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from "@nestjs/common";
 import {JwtAuthGuard} from '../auth/jwt-auth.guard';
 import {TodosService} from './todos.service';
 import {CreateTodoDto} from './dto/create-todo.dto';
 import {UpdateTodoDto} from './dto/update-todo.dto';
 import {ApiTags} from '@nestjs/swagger';
+import { PaginationParams } from "../lib/pagination-params";
 
 @ApiTags('Todos')
 @Controller('todos')
@@ -18,8 +19,8 @@ export class TodosController {
     }
 
     @Get()
-    findAll() {
-        return this.todosService.findAll();
+    findAll(@Query() pagination: PaginationParams) {
+        return this.todosService.findAll(pagination);
     }
 
     @Get(':id')

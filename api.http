@@ -22,19 +22,23 @@ Content-Type: application/json
 %}
 ###
 
-GET http://{{host}}/products
+GET http://{{host}}/products?page=1&limit=20
+Authorization: Bearer {{token}}
 
 ###
 
 GET http://{{host}}/products/tags
+Authorization: Bearer {{token}}
 
 ###
 
 GET http://{{host}}/products/1
+Authorization: Bearer {{token}}
 
 ###
 
 GET http://{{host}}/products/Computers
+Authorization: Bearer {{token}}
 
 ###
 
@@ -59,6 +63,7 @@ Authorization: Bearer {{token}}
 
 POST http://{{host}}/tickets
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "title": "Test Task",
@@ -72,6 +77,7 @@ Content-Type: application/json
 
 PATCH http://{{host}}/tickets/1
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "title": "Test Task changed!"
@@ -80,6 +86,7 @@ Content-Type: application/json
 ###
 
 DELETE http://{{host}}/tickets/1
+Authorization: Bearer {{token}}
 
 ### Used to delete the auth token
 

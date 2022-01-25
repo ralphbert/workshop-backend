@@ -1,4 +1,5 @@
 import { IdEntity } from "./crud-storage";
+import { PaginationParams } from "./pagination-params";
 
 export function getPaginatedResponse<T>(items: T[], page: number, limit = 20): PaginatedResponse<T> {
   const normalizedPage = Math.max(0, page - 1);
@@ -20,7 +21,7 @@ export interface PaginatedResponse<T> {
 
 export interface CrudServiceInterface<T extends IdEntity, CreateEntity, UpdateEntity> {
   create(createDto: CreateEntity): T;
-  findAll(): PaginatedResponse<T>;
+  findAll(pagination: PaginationParams): PaginatedResponse<T>;
   findOne(id: number): T | undefined;
   update(id: number, updateDto: UpdateEntity): T;
   remove(id: number): void;

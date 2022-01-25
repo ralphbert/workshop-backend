@@ -4,6 +4,7 @@ import { CreateProductDto } from "./dto/create-product.dto";
 import { UpdateProductDto } from "./dto/update-product.dto";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 import { ApiTags } from "@nestjs/swagger";
+import { PaginationParams } from "../lib/pagination-params";
 
 @ApiTags("Products")
 @Controller("products")
@@ -18,8 +19,8 @@ export class ProductsController {
   }
 
   @Get()
-  findAll() {
-    return this.service.findAll();
+  findAll(@Param() paginationParams: PaginationParams) {
+    return this.service.findAll(paginationParams);
   }
 
   @Get('init')

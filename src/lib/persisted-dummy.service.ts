@@ -3,6 +3,7 @@ import { CrudServiceInterface, getPaginatedResponse, PaginatedResponse } from ".
 import { JsonDB } from "node-json-db";
 import { getDatabase } from "../db.service";
 import { HttpException, HttpStatus, Query } from "@nestjs/common";
+import { PaginationParams } from "./pagination-params";
 
 const INITIAL_ID = 0;
 
@@ -37,7 +38,7 @@ export abstract class PersistedDummyService<T extends IdEntity, CreateEntity, Up
       id: ++this.lastId
     };
 
-    const items = this.findAll();
+    const items = this.getAll();
     items.push(item);
 
     this.db.push("/items", items);
@@ -45,16 +46,20 @@ export abstract class PersistedDummyService<T extends IdEntity, CreateEntity, Up
     return item as T;
   }
 
-  findAll(@Query('page') page = "1", @Query('limit') limit = "20"): PaginatedResponse<T> {
+  getAll() {
+    return this.db.getData("/items") || [];
+  }
+
+  findAll(pagination: PaginationParams): PaginatedResponse<T> {
     return getPaginatedResponse(
-      (this.db.getData("/items") || []),
-      parseInt(page),
-      parseInt(limit),
+      this.getAll(),
+      parseInt(pagination.page),
+      parseInt(pagination.limit),
     );
   }
 
   findOne(id: number): T | undefined {
-    const item = this.findAll().find(item => item.id === id);
+    const item = this.getAll().find(item => item.id === id);
 
     if (!item) {
       throw new HttpException('Element with id ' + id + ' not found', HttpStatus.NOT_FOUND);
@@ -64,12 +69,12 @@ export abstract class PersistedDummyService<T extends IdEntity, CreateEntity, Up
   }
 
   remove(id: number): void {
-    const all = this.findAll().filter(item => item.id !== id);
+    const all = this.getAll().filter(item => item.id !== id);
     this.db.push("/items", all);
   }
 
   update(id: number, updateDto: UpdateEntity): T {
-    const all = this.findAll().map(item => {
+    const all = this.getAll().map(item => {
       if (item.id === id) {
         return updateDto;
       } else {

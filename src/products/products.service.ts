@@ -27,7 +27,7 @@ export class ProductsService extends PersistedDummyService<ProductEntity, Create
   }
 
   getTags() {
-    const tags = this.findAll().reduce((allTags, product) => {
+    const tags = this.getAll().reduce((allTags, product) => {
       return [...allTags, ...product.tags];
     }, []);
 
@@ -37,8 +37,7 @@ export class ProductsService extends PersistedDummyService<ProductEntity, Create
   findAllByTag(tag: string) {
     tag = tag.toLowerCase().trim();
 
-    return this.findAll().filter(product => {
-      console.log(product.tags);
+    return this.getAll().filter(product => {
       const lowerTags = product.tags.map(t => t.toLowerCase().trim());
       return lowerTags.includes(tag);
     });

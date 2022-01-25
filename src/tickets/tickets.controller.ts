@@ -5,6 +5,7 @@ import { UpdateTicketDto } from './dto/update-ticket.dto';
 import {ApiBody, ApiCreatedResponse, ApiOkResponse, ApiTags} from '@nestjs/swagger';
 import {TicketSettingsDto} from './dto/ticket-settings.dto';
 import {Ticket} from './entities/ticket.entity';
+import { PaginationParams } from "../lib/pagination-params";
 
 @ApiTags('Tickets')
 @Controller('tickets')
@@ -31,8 +32,8 @@ export class TicketsController {
     type: [Ticket]
   })
   @Get()
-  findAll() {
-    return this.ticketsService.findAll();
+  findAll(pagination: PaginationParams) {
+    return this.ticketsService.findAll(pagination);
   }
 
   @ApiOkResponse({
