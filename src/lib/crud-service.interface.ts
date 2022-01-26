@@ -1,18 +1,35 @@
 import { IdEntity } from "./crud-storage";
-import { PaginationParams } from "./pagination-params";
+import { IsNumberString } from "class-validator";
 
-export function getPaginatedResponse<T>(items: T[], page: number, limit = 20): PaginatedResponse<T> {
+export function getPaginatedResponse<T>(items: T[], _page: number = 1, _limit = 20): PaginatedResponse<T> {
+  let page = _page < 0 ? +defaultPaginationParams.page : _page;
+  const limit = _limit <= 0 ? +defaultPaginationParams.limit : _limit;
+
   const normalizedPage = Math.max(0, page - 1);
-  const slice = items.slice(normalizedPage * limit, normalizedPage * limit + limit);
+  let start = normalizedPage * limit;
+  const totalPages = Math.max(Math.ceil(items.length / limit), 1);
+  const end = start + limit;
+  const slice = items.slice(start, end);
+
   return {
     page,
-    totalPages: Math.floor(items.length / limit) + 1,
+    totalPages,
     pageSize: limit,
     items: slice,
+    totalItems: items.length,
   };
 }
 
+export class PaginationParams {
+  @IsNumberString()
+  page: string | number = 1;
+
+  @IsNumberString()
+  limit: string | number = 20;
+}
+
 export interface PaginatedResponse<T> {
+  totalItems: number;
   totalPages: number;
   page: number;
   pageSize: number;
@@ -27,6 +44,7 @@ export const defaultPaginationParams: PaginationParams = {
 export interface CrudServiceInterface<T extends IdEntity, CreateEntity, UpdateEntity> {
   create(createDto: CreateEntity): T;
   findAll(pagination: PaginationParams): PaginatedResponse<T>;
+  findAllByFilter(filterFn: (item: T) => boolean, pagination: PaginationParams): PaginatedResponse<T>;
   findOne(id: number): T | undefined;
   update(id: number, updateDto: UpdateEntity): T;
   remove(id: number): void;

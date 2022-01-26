@@ -5,7 +5,7 @@ import { UpdateTicketDto } from './dto/update-ticket.dto';
 import {ApiBody, ApiCreatedResponse, ApiOkResponse, ApiTags} from '@nestjs/swagger';
 import {TicketSettingsDto} from './dto/ticket-settings.dto';
 import {Ticket} from './entities/ticket.entity';
-import { PaginationParams } from "../lib/pagination-params";
+import { PaginationParams } from "../lib/crud-service.interface";
 
 @ApiTags('Tickets')
 @Controller('tickets')

@@ -22,6 +22,10 @@ export const initValues = [
 
 @Injectable()
 export class ProductsService extends PersistedDummyService<ProductEntity, CreateProductDto, UpdateProductDto>{
+  constructor(dbName: string) {
+    super(dbName);
+  }
+
   getNewEntity(): ProductEntity {
     return new ProductEntity();
   }
@@ -41,9 +45,5 @@ export class ProductsService extends PersistedDummyService<ProductEntity, Create
       const lowerTags = product.tags.map(t => t.toLowerCase().trim());
       return lowerTags.includes(tag);
     });
-  }
-
-  getDatabaseName(): string {
-    return 'products';
   }
 }

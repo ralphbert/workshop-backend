@@ -4,7 +4,7 @@ import {TodosService} from './todos.service';
 import {CreateTodoDto} from './dto/create-todo.dto';
 import {UpdateTodoDto} from './dto/update-todo.dto';
 import {ApiTags} from '@nestjs/swagger';
-import { PaginationParams } from "../lib/pagination-params";
+import { PaginationParams } from "../lib/crud-service.interface";
 
 @ApiTags('Todos')
 @Controller('todos')

@@ -1,6 +1,6 @@
 import { HttpException } from "@nestjs/common";
 import { PersistedDummyService } from "./persisted-dummy.service";
-import { PaginatedResponse } from "./crud-service.interface";
+import { PaginatedResponse, PaginationParams } from "./crud-service.interface";
 
 interface CreateEntity {
   name: string;
@@ -13,15 +13,11 @@ class Entity implements CreateEntity {
 
 class DummyService extends PersistedDummyService<Entity, CreateEntity, Entity> {
   constructor() {
-    super();
+    super('test');
   }
 
   getNewEntity(): Entity {
     return new Entity();
-  }
-
-  getDatabaseName(): string {
-    return "test";
   }
 }
 
@@ -33,6 +29,8 @@ describe("CrudStorage", () => {
     service.reset();
   });
 
+  afterAll(() => service.deleteDatabase());
+
   describe('test reset', () => {
     it('should clear the state', () => {
       service.reset();
@@ -40,7 +38,8 @@ describe("CrudStorage", () => {
         items: [],
         page: 1,
         pageSize: 20,
-        totalPages: 1
+        totalPages: 1,
+        totalItems: 0,
       } as PaginatedResponse<Entity>);
       expect(service.lastId).toEqual(0);
 
@@ -91,9 +90,18 @@ describe("CrudStorage", () => {
   });
 
   describe('pagination', () => {
-    it('should fetch correct page', () => {
+    it('should find all', () => {
+      let response: PaginatedResponse<Entity>;
       service.reset();
-      const toAdd = 50;
+
+      response = service.findAll();
+      expect(response.page).toEqual(1);
+      expect(response.pageSize).toEqual(20);
+      expect(response.items.length).toEqual(0);
+      expect(response.totalPages).toEqual(1);
+      expect(response.totalItems).toEqual(0);
+
+      const toAdd = 45;
 
       for (let i = 1; i <= toAdd; i++) {
         service.create({
@@ -101,19 +109,130 @@ describe("CrudStorage", () => {
         });
       }
 
-      let response: PaginatedResponse<Entity>;
 
       response = service.findAll();
       expect(response.page).toEqual(1);
       expect(response.pageSize).toEqual(20);
       expect(response.items.length).toEqual(20);
       expect(response.totalPages).toEqual(3);
+      expect(response.totalItems).toEqual(45);
 
       response = service.findAll({ page: 1, limit: 10 });
       expect(response.page).toEqual(1);
       expect(response.pageSize).toEqual(10);
       expect(response.items.length).toEqual(10);
       expect(response.totalPages).toEqual(5);
+      expect(response.totalItems).toEqual(45);
+
+      response = service.findAll({ page: 2, limit: 10 });
+      expect(response.page).toEqual(2);
+      expect(response.pageSize).toEqual(10);
+      expect(response.items.length).toEqual(10);
+      expect(response.totalPages).toEqual(5);
+      expect(response.totalItems).toEqual(45);
+
+      response = service.findAll({ page: 100, limit: 10 });
+      expect(response.page).toEqual(100);
+      expect(response.pageSize).toEqual(10);
+      expect(response.items.length).toEqual(0);
+      expect(response.totalPages).toEqual(5);
+      expect(response.totalItems).toEqual(45);
+
+      response = service.findAll({ page: -2, limit: 10 });
+      expect(response.page).toEqual(1);
+      expect(response.pageSize).toEqual(10);
+      expect(response.items.length).toEqual(10);
+      expect(response.totalPages).toEqual(5);
+      expect(response.totalItems).toEqual(45);
+
+      response = service.findAll({ page: 1, limit: -10 });
+      expect(response.page).toEqual(1);
+      expect(response.pageSize).toEqual(20);
+      expect(response.items.length).toEqual(20);
+      expect(response.totalPages).toEqual(3);
+      expect(response.totalItems).toEqual(45);
+
+      response = service.findAll({ page: -10, limit: -10 });
+      expect(response.page).toEqual(1);
+      expect(response.pageSize).toEqual(20);
+      expect(response.items.length).toEqual(20);
+      expect(response.totalPages).toEqual(3);
+      expect(response.totalItems).toEqual(45);
+
+      response = service.findAll({ page: 1, limit: 1000 });
+      expect(response.page).toEqual(1);
+      expect(response.pageSize).toEqual(1000);
+      expect(response.items.length).toEqual(45);
+      expect(response.totalPages).toEqual(1);
+      expect(response.totalItems).toEqual(45);
     })
+
+    it('should filter all', () => {
+      let response: PaginatedResponse<Entity>;
+      service.reset();
+      response = service.findAll();
+      expect(response.page).toEqual(1);
+      expect(response.pageSize).toEqual(20);
+      expect(response.items.length).toEqual(0);
+      expect(response.totalPages).toEqual(1);
+      expect(response.totalItems).toEqual(0);
+
+      for (let i = 1; i <= 21; i++) {
+        service.create({
+          name: 'Foo ' + i,
+        });
+      }
+
+      for (let i = 1; i <= 21; i++) {
+        service.create({
+          name: 'Bar ' + i,
+        });
+      }
+
+      for (let i = 1; i <= 21; i++) {
+        service.create({
+          name: 'Baz ' + i,
+        });
+      }
+
+      response = service.findAll();
+      expect(response.page).toEqual(1);
+      expect(response.pageSize).toEqual(20);
+      expect(response.items.length).toEqual(20);
+      expect(response.totalPages).toEqual(4);
+      expect(response.totalItems).toEqual(63);
+
+      let pagination: PaginationParams = {
+        page: 1,
+        limit: 10,
+      };
+
+      const words = ['Foo', 'Bar', 'Baz'];
+
+      words.forEach(word => {
+        response = service.findAllByFilter(item => item.name.includes(word), { ...pagination });
+        expect(response.items.length).toEqual(10);
+        expect(response.totalPages).toEqual(3);
+        expect(response.totalItems).toEqual(21);
+      });
+
+      pagination.page = 2;
+
+      words.forEach(word => {
+        response = service.findAllByFilter(item => item.name.includes(word), { ...pagination });
+        expect(response.items.length).toEqual(10);
+        expect(response.totalPages).toEqual(3);
+        expect(response.totalItems).toEqual(21);
+      });
+
+      pagination.page = 10;
+
+      words.forEach(word => {
+        response = service.findAllByFilter(item => item.name.includes(word), { ...pagination });
+        expect(response.items.length).toEqual(0);
+        expect(response.totalPages).toEqual(3);
+        expect(response.totalItems).toEqual(21);
+      });
+    });
   })
 });

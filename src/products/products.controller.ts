@@ -1,10 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from "@nestjs/common";
 import { initValues, ProductsService } from "./products.service";
 import { CreateProductDto } from "./dto/create-product.dto";
 import { UpdateProductDto } from "./dto/update-product.dto";
 import { JwtAuthGuard } from "../auth/jwt-auth.guard";
 import { ApiTags } from "@nestjs/swagger";
-import { PaginationParams } from "../lib/pagination-params";
+import { PaginationParams } from "../lib/crud-service.interface";
+import { SearchParamsDto } from "./dto/search-params.dto";
 
 @ApiTags("Products")
 @Controller("products")
@@ -19,7 +20,7 @@ export class ProductsController {
   }
 
   @Get()
-  findAll(@Param() paginationParams: PaginationParams) {
+  findAll(@Query() paginationParams: PaginationParams) {
     return this.service.findAll(paginationParams);
   }
 
@@ -37,6 +38,15 @@ export class ProductsController {
   @Get("tags/:tag")
   findAllByTag(@Param("tag") tag: string) {
     return this.service.findAllByTag(tag);
+  }
+
+  @Get("search")
+  search(@Query() params: SearchParamsDto) {
+    const q = (params.q || '').toLowerCase().trim();
+
+    return this.service.findAllByFilter(item => {
+      return item.name.toLowerCase().includes(q);
+    }, params);
   }
 
   @Get(":id")
