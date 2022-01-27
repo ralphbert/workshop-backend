@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from "@nestjs/common";
 import { initValues, ProductsService } from "./products.service";
 import { CreateProductDto } from "./dto/create-product.dto";
 import { UpdateProductDto } from "./dto/update-product.dto";
@@ -26,6 +26,17 @@ export class ProductsController {
   init() {
     this.service.reset(initValues);
     return 'OK'
+  }
+
+  @Get('search')
+  getSearch(@Query('q') q: string) {
+    if (q) {
+      return this.findAll().filter(p => {
+        return p.name.toLowerCase().includes(q.toLowerCase());
+      });
+    }
+
+    return this.findAll()
   }
 
   @Get('tags')
