@@ -5,34 +5,41 @@
             "name": "PC",
             "price": 1800,
             "tags": [
-                "Computers"
+                "Computers",
+                "Office"
             ],
-            "image": "https://dummyimage.com/400x350"
+            "image": "https://d10mhq06fikmnr.cloudfront.net/catalog/product/thumbnail/bbd89f27fa66af0f1d7e9216c155c386/image/500x500/000/80/m/b/mb520_rgb_main_pink-min.jpg"
         },
         {
             "id": 2,
             "name": "MacBook",
             "price": 2499,
             "tags": [
-                "Computers"
+                "Computers",
+                "Office",
+                "Mobile"
             ],
-            "image": "https://dummyimage.com/400x350"
+            "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mbp-spacegray-select-202011_GEO_EMEA_LANG_DE?wid=452&hei=420&fmt=jpeg&qlt=95&.v=1632948907000"
         },
         {
             "id": 3,
             "name": "MacBook Pro",
             "price": 2999,
             "tags": [
-                "Computers"
+                "Computers",
+                "Office",
+                "Mobile"
             ],
-            "image": "https://dummyimage.com/400x350"
+            "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mbp-spacegray-select-202011_GEO_EMEA_LANG_DE?wid=452&hei=420&fmt=jpeg&qlt=95&.v=1632948907000"
         },
         {
             "id": 4,
             "name": "Laptop",
             "price": 2100,
             "tags": [
-                "Computers"
+                "Computers",
+                "Office",
+                "Mobile"
             ],
             "image": "https://dummyimage.com/400x350"
         },
@@ -41,7 +48,8 @@
             "name": "iPhone",
             "price": 899,
             "tags": [
-                "Mobile Phones"
+                "Mobile Phones",
+                "Mobile"
             ],
             "image": "https://dummyimage.com/400x350"
         },
@@ -50,7 +58,8 @@
             "name": "Samsung S20",
             "price": 799,
             "tags": [
-                "Mobile Phones"
+                "Mobile Phones",
+                "Mobile"
             ],
             "image": "https://dummyimage.com/400x350"
         },
@@ -59,7 +68,8 @@
             "name": "iPad",
             "price": 1099,
             "tags": [
-                "Tablets"
+                "Tablets",
+                "Mobile"
             ],
             "image": "https://dummyimage.com/400x350"
         },
@@ -68,7 +78,8 @@
             "name": "Android Tablet",
             "price": 299,
             "tags": [
-                "Tablets"
+                "Tablets",
+                "Mobile"
             ],
             "image": "https://dummyimage.com/400x350"
         },
@@ -77,7 +88,8 @@
             "name": "Washing Machine",
             "price": 599,
             "tags": [
-                "Household"
+                "Household",
+                "Cleaning"
             ],
             "image": "https://dummyimage.com/400x350"
         },
@@ -86,27 +98,30 @@
             "name": "KitchenAid",
             "price": 399,
             "tags": [
-                "Household"
+                "Household",
+                "Cooking"
             ],
-            "image": "https://dummyimage.com/400x350"
+            "image": "https://whirlpool-cdn.thron.com/delivery/public/thumbnail/whirlpool/pi-c4d07437-ac44-42fc-9ded-b7b2f94d5b08/sckne7/std/1000x1000/859702301230.jpg?fill=zoom&fillcolor=rgba:255,255,255&scalemode=product"
         },
         {
             "id": 11,
             "name": "Pizza Oven",
             "price": 599,
             "tags": [
-                "Household"
+                "Household",
+                "Cooking"
             ],
-            "image": "https://dummyimage.com/400x350"
+            "image": "https://www.tyzzeria.com/wp-content/uploads/2020/12/EtnaTWO4-1.jpg"
         },
         {
             "id": 12,
             "name": "Dishwasher",
             "price": 299,
             "tags": [
-                "Household"
+                "Household",
+                "Cleaning"
             ],
-            "image": "https://dummyimage.com/400x350"
+            "image": "https://www.lg.com/in/images/dishwasher/md06108776/gallery/09-1600x1062.jpg"
         }
     ]
 }
