@@ -4,109 +4,136 @@
             "id": 1,
             "name": "PC",
             "price": 1800,
+            "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.<br>Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus<br>mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa\nquis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo,<br>rhoncus ut, imperdiet a, venenatis vitae, justo.",
             "tags": [
-                "Computers"
+                "Computers",
+                "Office"
             ],
-            "image": "https://dummyimage.com/400x350"
+            "image": "https://d10mhq06fikmnr.cloudfront.net/catalog/product/thumbnail/bbd89f27fa66af0f1d7e9216c155c386/image/500x500/000/80/m/b/mb520_rgb_main_pink-min.jpg"
         },
         {
             "id": 2,
             "name": "MacBook",
             "price": 2499,
+            "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.<br>Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus<br>mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa\nquis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo,<br>rhoncus ut, imperdiet a, venenatis vitae, justo.",
             "tags": [
-                "Computers"
+                "Computers",
+                "Office",
+                "Mobile"
             ],
-            "image": "https://dummyimage.com/400x350"
+            "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mbp-spacegray-select-202011_GEO_EMEA_LANG_DE?wid=452&hei=420&fmt=jpeg&qlt=95&.v=1632948907000"
         },
         {
             "id": 3,
             "name": "MacBook Pro",
             "price": 2999,
+            "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.<br>Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus<br>mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa\nquis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo,<br>rhoncus ut, imperdiet a, venenatis vitae, justo.",
             "tags": [
-                "Computers"
+                "Computers",
+                "Office",
+                "Mobile"
             ],
-            "image": "https://dummyimage.com/400x350"
+            "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mbp-spacegray-select-202011_GEO_EMEA_LANG_DE?wid=452&hei=420&fmt=jpeg&qlt=95&.v=1632948907000"
         },
         {
             "id": 4,
             "name": "Laptop",
             "price": 2100,
+            "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.<br>Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus<br>mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa\nquis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo,<br>rhoncus ut, imperdiet a, venenatis vitae, justo.",
             "tags": [
-                "Computers"
+                "Computers",
+                "Office",
+                "Mobile"
             ],
-            "image": "https://dummyimage.com/400x350"
+            "image": "https://www.notebookcheck.com/uploads/tx_nbc2/MicrosoftSurfaceLaptop3-15__1__01.JPG"
         },
         {
             "id": 5,
             "name": "iPhone",
             "price": 899,
+            "description": "The TrueDepth camera system has all the latest features from the back cameras\n\nTake your selfies to a new stratosphere with Cinematic mode and Photographic Styles\n\nSharePlay lets you and your friends watch movies, listen to music, or share your screens in FaceTime video calls\n\nA15 Bionic and the TrueDepth camera power Face ID, the most secure facial authentication in a smartphone",
             "tags": [
-                "Mobile Phones"
+                "Mobile Phones",
+                "Mobile"
             ],
-            "image": "https://dummyimage.com/400x350"
+            "image": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone11-select-2019-family_GEO_EMEA?wid=882&hei=1058&fmt=jpeg&qlt=95&.v=1567022219953"
         },
         {
             "id": 6,
             "name": "Samsung S20",
             "price": 799,
+            "description": "Einen herzlichen Applaus für das Galaxy S21 FE 5G, das neueste Mitglied der Galaxy S21-Serie 5G.\n\nWir haben deine Favoriten kombiniert, und ein beeindruckendes, von Fans inspiriertes Telefon gebaut, damit du Alltag und Hobby genießen kannst.\n\nEiner der schnellsten Chipsätze? Abgehakt. Hochwertige Kamera? Alles klar.\n\nUnd die Menge tobt.\n\nDie Fan Edition ist zurück.",
             "tags": [
-                "Mobile Phones"
+                "Mobile Phones",
+                "Mobile"
             ],
-            "image": "https://dummyimage.com/400x350"
+            "image": "https://www.mytrendyphone.at/images/Samsung-Galaxy-S20-FE-Duos-128GB-Cloud-Navy-8806090716935-02102020-01.jpg"
         },
         {
             "id": 7,
             "name": "iPad",
             "price": 1099,
+            "description": "With the incredible versatility of iPad Air, you can work any way you want. Use the Smart Keyboard Folio, or attach the Magic Keyboard for responsive typing and a built‑in trackpad.1 It’s perfect for the things you need to do, like sending an email. Or the things you want to do, like writing a short story. And with all‑day battery life,2 iPad Air is ready to work for as long as you need it.",
             "tags": [
-                "Tablets"
+                "Tablets",
+                "Mobile"
             ],
-            "image": "https://dummyimage.com/400x350"
+            "image": "https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_83559268/fee_786_587_png"
         },
         {
             "id": 8,
             "name": "Android Tablet",
             "price": 299,
+            "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.<br>Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus<br>mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa\nquis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo,<br>rhoncus ut, imperdiet a, venenatis vitae, justo.",
             "tags": [
-                "Tablets"
+                "Tablets",
+                "Mobile"
             ],
-            "image": "https://dummyimage.com/400x350"
+            "image": "https://ae01.alicdn.com/kf/H44c926ae6ec84d118f534688c1eea734r/Neue-10-1-Zoll-Tablet-Pc-Octa-Core-Android-9-0-Google-Play-4G-LTE-Anruf.jpg_Q90.jpg_.webp"
         },
         {
             "id": 9,
             "name": "Washing Machine",
             "price": 599,
+            "description": "A washing machine (laundry machine, clothes washer, washer, or simply wash) is a home appliance used to wash laundry. The term is mostly applied to machines that use water as opposed to dry cleaning (which uses alternative cleaning fluids and is performed by specialist businesses) or ultrasonic cleaners. The user adds laundry detergent, which is sold in liquid or powder form, to the wash water.",
             "tags": [
-                "Household"
+                "Household",
+                "Cleaning"
             ],
-            "image": "https://dummyimage.com/400x350"
+            "image": "https://www.vs-elektro.net/out/pictures/master/product/1/wca030.jpg"
         },
         {
             "id": 10,
             "name": "KitchenAid",
             "price": 399,
+            "description": "Whether you need 9 dozen of your signature chocolate chips cookies or several pounds of shredded chicken for Taco Tuesday, the KitchenAid® Artisan® Series Tilt-Head Stand Mixer with Premium Accessory Pack has the capacity and tools for every occasion. This model includes both a 3 and 5 quart bowl, so you can do more - mix up batter in one and then whip up a silky frosting in the other. In addition, the exclusive accessory pack includes a flex edge beater, pastry beater, dough hook, wire whip and redesigned secure fit pouring shield. This durable tilt-head stand mixer was built to take it all on, and features 10 speeds to gently knead, thoroughly mix and whip ingredients for a wide variety of recipes.\n\n",
             "tags": [
-                "Household"
+                "Household",
+                "Cooking"
             ],
-            "image": "https://dummyimage.com/400x350"
+            "image": "https://whirlpool-cdn.thron.com/delivery/public/thumbnail/whirlpool/pi-c4d07437-ac44-42fc-9ded-b7b2f94d5b08/sckne7/std/1000x1000/859702301230.jpg?fill=zoom&fillcolor=rgba:255,255,255&scalemode=product"
         },
         {
             "id": 11,
             "name": "Pizza Oven",
             "price": 599,
+            "description": "Speziell für diejenigen entwickelt, die kein Holz verwenden können oder möchten, aber trotzdem eine perfekte Pizza zaubern wollen. Der Etna 2 ist sehr mobil und Sie können auf der Terrasse oder untern freiem Himmel Pizza backen.",
             "tags": [
-                "Household"
+                "Household",
+                "Cooking"
             ],
-            "image": "https://dummyimage.com/400x350"
+            "image": "https://www.tyzzeria.com/wp-content/uploads/2020/12/EtnaTWO4-1.jpg"
         },
         {
             "id": 12,
             "name": "Dishwasher",
             "price": 299,
+            "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.",
             "tags": [
-                "Household"
+                "Household",
+                "Cleaning"
             ],
-            "image": "https://dummyimage.com/400x350"
+            "image": "https://www.lg.com/in/images/dishwasher/md06108776/gallery/09-1600x1062.jpg"
         }
     ]
 }

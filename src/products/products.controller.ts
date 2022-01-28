@@ -30,6 +30,17 @@ export class ProductsController {
     return 'OK'
   }
 
+  @Get('search')
+  getSearch(@Query('q') q: string) {
+    if (q) {
+      return this.findAll().filter(p => {
+        return p.name.toLowerCase().includes(q.toLowerCase());
+      });
+    }
+
+    return this.findAll()
+  }
+
   @Get('tags')
   getTags() {
     return this.service.getTags();
