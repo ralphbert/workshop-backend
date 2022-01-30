@@ -9,7 +9,14 @@ import { TicketsModule } from './tickets/tickets.module';
 import { ProductsModule } from './products/products.module';
 
 @Module({
-  imports: [CoinsModule, UsersModule, AuthModule, TodosModule, TicketsModule, ProductsModule],
+  imports: [
+    CoinsModule,
+    UsersModule,
+    AuthModule,
+    TodosModule,
+    TicketsModule,
+    ProductsModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

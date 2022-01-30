@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UsersService, User } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
-import {SignInResponseDto} from './dto/sign-in-response.dto';
+import { SignInResponseDto } from './dto/sign-in-response.dto';
 
 @Injectable()
 export class AuthService {
@@ -16,6 +16,7 @@ export class AuthService {
   ): Promise<Omit<User, 'password'>> {
     const user = await this.usersService.findOneByUsername(username);
     if (user && user.password === pass) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, ...result } = user;
       return result;
     }

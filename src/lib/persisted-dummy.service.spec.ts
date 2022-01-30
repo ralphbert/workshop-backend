@@ -1,6 +1,6 @@
-import { HttpException } from "@nestjs/common";
-import { PersistedDummyService } from "./persisted-dummy.service";
-import { PaginatedResponse, PaginationParams } from "./crud-service.interface";
+import { HttpException } from '@nestjs/common';
+import { PersistedDummyService } from './persisted-dummy.service';
+import { PaginatedResponse, PaginationParams } from './crud-service.interface';
 
 interface CreateEntity {
   name: string;
@@ -21,7 +21,7 @@ class DummyService extends PersistedDummyService<Entity, CreateEntity, Entity> {
   }
 }
 
-describe("CrudStorage", () => {
+describe('CrudStorage', () => {
   let service: DummyService;
 
   beforeEach(() => {
@@ -54,30 +54,36 @@ describe("CrudStorage", () => {
 
       service.remove(1);
       expect(service.lastId).toEqual(2);
-    })
-  })
+    });
+  });
 
-  describe("add", () => {
-    it("should add elements", async () => {
+  describe('add', () => {
+    it('should add elements', async () => {
       expect(service.findAll().items.length).toBe(0);
       expect(service.lastId).toBe(0);
 
-      const entity = service.create({ name: "Test" });
-      expect(entity).toEqual({ id: 1, name: "Test" });
-      expect(service.findOne(1)).toEqual({ id: 1, name: "Test" });
-      expect(service.findAll().items.find(item => item.id === 1)).toEqual({ id: 1, name: "Test" });
+      const entity = service.create({ name: 'Test' });
+      expect(entity).toEqual({ id: 1, name: 'Test' });
+      expect(service.findOne(1)).toEqual({ id: 1, name: 'Test' });
+      expect(service.findAll().items.find((item) => item.id === 1)).toEqual({
+        id: 1,
+        name: 'Test',
+      });
       expect(service.findAll().items.length).toBe(1);
       expect(service.lastId).toBe(1);
 
-      const entity2 = service.create({ name: "Foo" });
-      expect(entity2).toEqual({ id: 2, name: "Foo" });
-      expect(service.findOne(2)).toEqual({ id: 2, name: "Foo" });
-      expect(service.findAll().items.find(item => item.id === 2)).toEqual({ id: 2, name: "Foo" });
+      const entity2 = service.create({ name: 'Foo' });
+      expect(entity2).toEqual({ id: 2, name: 'Foo' });
+      expect(service.findOne(2)).toEqual({ id: 2, name: 'Foo' });
+      expect(service.findAll().items.find((item) => item.id === 2)).toEqual({
+        id: 2,
+        name: 'Foo',
+      });
       expect(service.findAll().items.length).toBe(2);
       expect(service.lastId).toBe(2);
 
-      const updated = service.update(3, { name: "Bar", id: 3 });
-      expect(updated).toEqual({ id: 3, name: "Bar" });
+      const updated = service.update(3, { name: 'Bar', id: 3 });
+      expect(updated).toEqual({ id: 3, name: 'Bar' });
 
       service.remove(2);
       expect(service.findAll().items.length).toBe(1);
@@ -108,7 +114,6 @@ describe("CrudStorage", () => {
           name: 'Test ' + i,
         });
       }
-
 
       response = service.findAll();
       expect(response.page).toEqual(1);
@@ -165,7 +170,7 @@ describe("CrudStorage", () => {
       expect(response.items.length).toEqual(45);
       expect(response.totalPages).toEqual(1);
       expect(response.totalItems).toEqual(45);
-    })
+    });
 
     it('should filter all', () => {
       let response: PaginatedResponse<Entity>;
@@ -202,15 +207,17 @@ describe("CrudStorage", () => {
       expect(response.totalPages).toEqual(4);
       expect(response.totalItems).toEqual(63);
 
-      let pagination: PaginationParams = {
+      const pagination: PaginationParams = {
         page: 1,
         limit: 10,
       };
 
       const words = ['Foo', 'Bar', 'Baz'];
 
-      words.forEach(word => {
-        response = service.findAllByFilter(item => item.name.includes(word), { ...pagination });
+      words.forEach((word) => {
+        response = service.findAllByFilter((item) => item.name.includes(word), {
+          ...pagination,
+        });
         expect(response.items.length).toEqual(10);
         expect(response.totalPages).toEqual(3);
         expect(response.totalItems).toEqual(21);
@@ -218,8 +225,10 @@ describe("CrudStorage", () => {
 
       pagination.page = 2;
 
-      words.forEach(word => {
-        response = service.findAllByFilter(item => item.name.includes(word), { ...pagination });
+      words.forEach((word) => {
+        response = service.findAllByFilter((item) => item.name.includes(word), {
+          ...pagination,
+        });
         expect(response.items.length).toEqual(10);
         expect(response.totalPages).toEqual(3);
         expect(response.totalItems).toEqual(21);
@@ -227,12 +236,14 @@ describe("CrudStorage", () => {
 
       pagination.page = 10;
 
-      words.forEach(word => {
-        response = service.findAllByFilter(item => item.name.includes(word), { ...pagination });
+      words.forEach((word) => {
+        response = service.findAllByFilter((item) => item.name.includes(word), {
+          ...pagination,
+        });
         expect(response.items.length).toEqual(0);
         expect(response.totalPages).toEqual(3);
         expect(response.totalItems).toEqual(21);
       });
     });
-  })
+  });
 });
