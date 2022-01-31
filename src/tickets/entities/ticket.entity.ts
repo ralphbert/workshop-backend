@@ -5,16 +5,31 @@ import { ApiProperty } from '@nestjs/swagger';
 export class Ticket implements CreateTicketDto {
   @ApiProperty()
   id: number;
+
   @ApiProperty()
   title: string;
+
   @ApiProperty()
   description: string;
+
+  @ApiProperty({
+    description: 'The timestamp of the due date',
+  })
+  due?: string;
+
+  @ApiProperty({
+    description: 'The id of the assigned user',
+  })
+  userId: number;
+
   @ApiProperty({
     enum: Object.values(TicketPriority),
   })
   priority: TicketPriority;
+
   @ApiProperty()
   color: string;
+
   @ApiProperty({
     enum: Object.values(TicketStatus),
   })

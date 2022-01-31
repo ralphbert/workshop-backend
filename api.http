@@ -46,7 +46,7 @@ GET http://{{host}}/auth/check-email?email={{username}}@example.com
 
 ###
 
-GET http://{{host}}/todos
+GET http://{{host}}/todos?page=1&limit=20
 Authorization: Bearer {{token}}
 
 ###
@@ -56,7 +56,17 @@ Authorization: Bearer {{token}}
 
 ###
 
+GET http://{{host}}/tickets/list?page=1&limit=20
+Authorization: Bearer {{token}}
+
+###
+
 GET http://{{host}}/tickets/settings
+Authorization: Bearer {{token}}
+
+###
+
+GET http://{{host}}/tickets/1
 Authorization: Bearer {{token}}
 
 ###
@@ -70,12 +80,13 @@ Authorization: Bearer {{token}}
   "description": "Some description",
   "priority": "normal",
   "status": "planned",
-  "color": "#ff55ff"
+  "color": "#ff55ff",
+  "userId": 1
 }
 
 ###
 
-PATCH http://{{host}}/tickets/1
+PATCH http://{{host}}/tickets/3
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
