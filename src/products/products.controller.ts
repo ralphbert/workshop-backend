@@ -1,16 +1,25 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UseGuards } from "@nestjs/common";
-import { initValues, ProductsService } from "./products.service";
-import { CreateProductDto } from "./dto/create-product.dto";
-import { UpdateProductDto } from "./dto/update-product.dto";
-import { JwtAuthGuard } from "../auth/jwt-auth.guard";
-import { ApiTags } from "@nestjs/swagger";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
+import { initValues, ProductsService } from './products.service';
+import { CreateProductDto } from './dto/create-product.dto';
+import { UpdateProductDto } from './dto/update-product.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { ApiTags } from '@nestjs/swagger';
 
-@ApiTags("Products")
-@Controller("products")
+@ApiTags('Products')
+@Controller('products')
 @UseGuards(JwtAuthGuard)
 export class ProductsController {
-  constructor(private readonly service: ProductsService) {
-  }
+  constructor(private readonly service: ProductsService) {}
 
   @Post()
   create(@Body() createDto: CreateProductDto) {
@@ -25,18 +34,18 @@ export class ProductsController {
   @Get('init')
   init() {
     this.service.reset(initValues);
-    return 'OK'
+    return 'OK';
   }
 
   @Get('search')
   getSearch(@Query('q') q: string) {
     if (q) {
-      return this.findAll().filter(p => {
+      return this.findAll().filter((p) => {
         return p.name.toLowerCase().includes(q.toLowerCase());
       });
     }
 
-    return this.findAll()
+    return this.findAll();
   }
 
   @Get('tags')
@@ -44,23 +53,23 @@ export class ProductsController {
     return this.service.getTags();
   }
 
-  @Get("tags/:tag")
-  findAllByTag(@Param("tag") tag: string) {
+  @Get('tags/:tag')
+  findAllByTag(@Param('tag') tag: string) {
     return this.service.findAllByTag(tag);
   }
 
-  @Get(":id")
-  findOne(@Param("id") id: string) {
+  @Get(':id')
+  findOne(@Param('id') id: string) {
     return this.service.findOne(+id);
   }
 
-  @Patch(":id")
-  update(@Param("id") id: string, @Body() updateDto: UpdateProductDto) {
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateDto: UpdateProductDto) {
     return this.service.update(+id, updateDto);
   }
 
-  @Delete(":id")
-  remove(@Param("id") id: string) {
+  @Delete(':id')
+  remove(@Param('id') id: string) {
     return this.service.remove(+id);
   }
 }

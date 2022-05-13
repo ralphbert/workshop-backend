@@ -7,9 +7,18 @@ import { AuthModule } from './auth/auth.module';
 import { TodosModule } from './todos/todos.module';
 import { TicketsModule } from './tickets/tickets.module';
 import { ProductsModule } from './products/products.module';
+import { EchoModule } from './echo/echo.module';
 
 @Module({
-  imports: [CoinsModule, UsersModule, AuthModule, TodosModule, TicketsModule, ProductsModule],
+  imports: [
+    CoinsModule,
+    UsersModule,
+    AuthModule,
+    TodosModule,
+    TicketsModule,
+    ProductsModule,
+    EchoModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

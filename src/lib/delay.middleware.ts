@@ -1,11 +1,15 @@
-import { NextFunction, Request, Response } from "express";
-import { isString } from "@nestjs/common/utils/shared.utils";
+import { NextFunction, Request, Response } from 'express';
+import { isString } from '@nestjs/common/utils/shared.utils';
 
-export function delayMiddleware(req: Request, res: Response, next: NextFunction) {
+export function delayMiddleware(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   let delayTime = 0;
 
   if (req.query?.delay && isString(req.query?.delay)) {
-    const parts = req.query.delay.split(",");
+    const parts = req.query.delay.split(',');
 
     if (parts.length) {
       delayTime = parseFloat(parts[0]);

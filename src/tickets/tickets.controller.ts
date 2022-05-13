@@ -1,10 +1,23 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { TicketsService } from './tickets.service';
 import { CreateTicketDto } from './dto/create-ticket.dto';
 import { UpdateTicketDto } from './dto/update-ticket.dto';
-import {ApiBody, ApiCreatedResponse, ApiOkResponse, ApiTags} from '@nestjs/swagger';
-import {TicketSettingsDto} from './dto/ticket-settings.dto';
-import {Ticket} from './entities/ticket.entity';
+import {
+  ApiBody,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
+import { TicketSettingsDto } from './dto/ticket-settings.dto';
+import { Ticket } from './entities/ticket.entity';
 
 @ApiTags('Tickets')
 @Controller('tickets')
@@ -28,7 +41,7 @@ export class TicketsController {
   }
 
   @ApiOkResponse({
-    type: [Ticket]
+    type: [Ticket],
   })
   @Get()
   findAll() {
@@ -36,7 +49,7 @@ export class TicketsController {
   }
 
   @ApiOkResponse({
-    type: Ticket
+    type: Ticket,
   })
   @Get(':id')
   findOne(@Param('id') id: string) {
@@ -44,7 +57,7 @@ export class TicketsController {
   }
 
   @ApiOkResponse({
-    type: Ticket
+    type: Ticket,
   })
   @ApiBody({ type: Ticket })
   @Patch(':id')

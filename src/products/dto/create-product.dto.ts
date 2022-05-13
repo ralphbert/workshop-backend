@@ -1,4 +1,4 @@
-import { IsArray, IsNotEmpty, IsNumber, IsPositive } from "class-validator";
+import { IsArray, IsNotEmpty, IsNumber, IsPositive } from 'class-validator';
 
 export class CreateProductDto {
   @IsNotEmpty()

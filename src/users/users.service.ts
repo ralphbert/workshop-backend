@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import * as faker from 'faker';
 import { Observable, of } from 'rxjs';
-import {Sign} from 'crypto';
-import {SignUpDto} from '../auth/dto/sign-up.dto';
-import {ApiProperty} from '@nestjs/swagger';
+import { SignUpDto } from '../auth/dto/sign-up.dto';
+import { ApiProperty } from '@nestjs/swagger';
 
 const departments = [
   'Development',
@@ -45,7 +44,7 @@ const users: User[] = [
     id: 10000,
     joinDate: new Date().toISOString(),
     password: 'admin',
-    email: 'admin@example.com'
+    email: 'admin@example.com',
   },
 ];
 
@@ -64,7 +63,7 @@ export class PublicUser implements Omit<User, 'password'> {
   @ApiProperty()
   id: number;
   @ApiProperty({
-    format: 'datetime'
+    format: 'datetime',
   })
   joinDate: string;
   @ApiProperty()
@@ -114,7 +113,7 @@ export class UsersService {
       level: 'Intermediate',
       joinDate: new Date().toDateString(),
       username: create.email,
-    }
+    };
 
     users.push(user);
 
@@ -129,6 +128,7 @@ export class UsersService {
     const user = users.find((current) => current.id == id);
 
     if (user) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { password, ...rest } = user;
       return rest;
     }
@@ -173,6 +173,6 @@ export class UsersService {
   }
 
   emailAvailable(email: string): boolean {
-    return !users.find(user => user.email === email);
+    return !users.find((user) => user.email === email);
   }
 }
